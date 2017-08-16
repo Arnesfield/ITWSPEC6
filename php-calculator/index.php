@@ -113,7 +113,7 @@ else {
       <h2><i class="material-icons">assessment</i> Calculator</h2>
     </div>
 
-    <form method="post" action="<?=$_SERVER['PHP_SELF']?>" class="row">
+    <form method="post" action="./" class="row">
 
       <div class="hidden-xs col-sm-1"></div>
 
