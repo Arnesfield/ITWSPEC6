@@ -28,8 +28,8 @@ $('#text').keyup(function() {
     },
     'success': function(res) {
 
-      var keys = Object.keys(res.val)
-      var values = Object.values(res.val)
+      var keys = Object.keys(res)
+      var values = Object.values(res)
       var str = ''
 
       for (var i = 0; i < keys.length; i++) {
@@ -37,7 +37,6 @@ $('#text').keyup(function() {
       }
 
       $('#content').html(str)
-      // Object.keys(res.val)
       
     }
   })
