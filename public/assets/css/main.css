@@ -1,3 +1,40 @@
 body, h1, h5, h3, pre {
   font-family: 'Roboto Mono', Consolas !important;
 }
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+.material-icons {
+  vertical-align: middle
+}
+
+.add-fab {
+  position: fixed;
+  z-index: 1;
+  bottom: 24px;
+  right: 24px;
+}
+
+.icon-textarea {
+  position: absolute;
+  top: 22px
+}
+
+.w-max {
+  width: 100%;
+}
+
+.w-input, .w-textarea {
+  width: 90%;
+}
+
+.w-textarea {
+  margin-left: 32px
+}
+
+.relative {
+  position: relative
+}
