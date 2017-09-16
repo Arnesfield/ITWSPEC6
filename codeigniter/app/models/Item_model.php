@@ -9,8 +9,7 @@ class Item_model extends CI_Model {
   }
 
   public function get_items() {
-    $this->db->from('tbl_item');
-    $this->db->where('item_status', '1');
+    $this->db->from('tbl_item')->where('item_status', '1');
     $this->db->order_by('item_added_at', 'desc');
     $query = $this->db->get();
     return $query->result();
@@ -42,6 +41,31 @@ class Item_model extends CI_Model {
     );
 
     return $this->db->insert('tbl_item', $data);
+  }
+
+  public function update_item($id) {
+    // new slug
+    $slug = $this->create_slug($this->input->post('name', true));
+
+    $data = array(
+      'item_name' => $this->input->post('name', true),
+      'item_desc' => $this->input->post('desc', true),
+      'item_price' => $this->input->post('price', true),
+      'item_updated_at' => time(),
+      'item_slug' => $slug
+    );
+
+    $this->db->where('item_id', $id);
+    return $this->db->update('tbl_item', $data);
+  }
+
+  public function get_item($slug) {
+    $this->db->from('tbl_item')->where(array(
+      'item_status' => '1',
+      'item_slug' => $slug
+    ));
+    $query = $this->db->get();
+    return !empty($query->result()) ? $query->result()[0] : FALSE;
   }
 
 }

@@ -56,6 +56,42 @@ class Item extends CI_Controller {
     }
 
   }
+
+  // update item
+  public function update($slug) {
+    $item = $this->item_model->get_item($slug);
+
+    if (!$item) {
+      show_404();
+    }
+
+    $data = array(
+      'title' => 'Update Item',
+      'item' => $item
+    );
+
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+
+    $this->form_validation->set_rules('name', 'item name', 'required');
+    $this->form_validation->set_rules('desc', 'item description', 'required');
+    $this->form_validation->set_rules('price', 'item price', 'required');
+    
+    if ($this->form_validation->run() === FALSE) {
+      $this->load->view('templates/header', $data);
+      $this->load->view('pages/item_update');
+      $this->load->view('templates/footer');
+    }
+    else {
+      if ($this->item_model->update_item($item->item_id)) {
+        set_cookie('msg_add', 'Item updated successfully.', 60);
+      }
+      else {
+        set_cookie('msg_add', 'An error occurred.', 60);
+      }
+      redirect(base_url());
+    }
+  }
   
 }
 

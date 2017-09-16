@@ -34,8 +34,11 @@
       <td><?=date('M d Y H:i:s', $item->item_added_at)?></td>
       <td><?=date('M d Y H:i:s', $item->item_updated_at)?></td>
       <td>
-        <a href="update/<?=$item->item_id?>" class="btn btn-default">Update</a>
-        <a href="delete/<?=$item->item_id?>" class="btn btn-danger">Delete</a>
+        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+          href="<?=base_url('item/update/' . $item->item_slug)?>">Update</a>
+        
+        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red-500 mdl-color-text--white"
+          href="<?=base_url('item/delete/' . $item->item_slug)?>">Delete</a>
       </td>
     </tr>
 
