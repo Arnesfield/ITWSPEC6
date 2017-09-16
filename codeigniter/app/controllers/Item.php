@@ -20,11 +20,11 @@ class Item extends CI_Controller {
     $this->load->view('templates/header', $data);
     $this->load->view('pages/item_records');
     
-    if (!empty($this->input->cookie('msg_add'))) {
+    if (!empty($this->input->cookie('msg'))) {
       $this->load->view('alerts/snackbar', array(
-        'msg' => $this->input->cookie('msg_add')
+        'msg' => $this->input->cookie('msg')
       ));
-      delete_cookie('msg_add');
+      delete_cookie('msg');
     }
 
     $this->load->view('templates/footer');
@@ -47,10 +47,10 @@ class Item extends CI_Controller {
     }
     else {
       if ($this->item_model->add_item()) {
-        set_cookie('msg_add', 'Item added successfully.', 60);
+        set_cookie('msg', 'Item added successfully.', 60);
       }
       else {
-        set_cookie('msg_add', 'An error occurred.', 60);
+        set_cookie('msg', 'An error occurred.', 60);
       }
       redirect(base_url());
     }
@@ -84,13 +84,30 @@ class Item extends CI_Controller {
     }
     else {
       if ($this->item_model->update_item($item->item_id)) {
-        set_cookie('msg_add', 'Item updated successfully.', 60);
+        set_cookie('msg', 'Item updated successfully.', 60);
       }
       else {
-        set_cookie('msg_add', 'An error occurred.', 60);
+        set_cookie('msg', 'An error occurred.', 60);
       }
       redirect(base_url());
     }
+  }
+
+  // delete item
+  public function delete($slug) {
+    $item = $this->item_model->get_item($slug);
+    
+    if (!$item) {
+      show_404();
+    }
+
+    if ($this->item_model->delete_item($item->item_id)) {
+      set_cookie('msg', 'Item deleted successfully.', 60);
+    }
+    else {
+      set_cookie('msg', 'An error occurred.', 60);
+    }
+    redirect(base_url());
   }
   
 }

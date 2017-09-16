@@ -37,8 +37,8 @@
         <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
           href="<?=base_url('item/update/' . $item->item_slug)?>">Update</a>
         
-        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red-500 mdl-color-text--white"
-          href="<?=base_url('item/delete/' . $item->item_slug)?>">Delete</a>
+        <a class="js-delete mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red-500 mdl-color-text--white"
+          data-slug="<?=base_url('item/delete/' . $item->item_slug)?>">Delete</a>
       </td>
     </tr>
 
@@ -59,3 +59,26 @@
   </a>
 
 </div>
+
+<script>
+$('.js-delete').click(function() {
+  var slug = $(this).attr('data-slug')
+  swal({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then(function() {
+    /* swal(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    ) */
+    window.location.replace(slug)
+  })
+
+})
+</script>

@@ -59,6 +59,13 @@ class Item_model extends CI_Model {
     return $this->db->update('tbl_item', $data);
   }
 
+  public function delete_item($id) {
+    // hide only
+    $data = array('item_status' => '0');
+    $this->db->where('item_id', $id);
+    return $this->db->update('tbl_item', $data);
+  }
+
   public function get_item($slug) {
     $this->db->from('tbl_item')->where(array(
       'item_status' => '1',

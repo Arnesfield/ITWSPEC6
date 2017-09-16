@@ -22,12 +22,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <link rel="stylesheet" href="<?=base_url('vendor/material-icons/material-icons.css')?>">
 <link rel="stylesheet" href="<?=base_url('vendor/bootstrap-grid-only/css/bootstrap.min.css')?>">
 <link rel="stylesheet" href="<?=base_url('vendor/mdl/material.min.css')?>">
+<link rel="stylesheet" href="<?=base_url('vendor/sweetalert2/sweetalert2.min.css')?>">
 <link rel="stylesheet" href="<?=base_url('vendor/my.css')?>">
 
 <link rel="stylesheet" href="<?=base_url('assets/css/main.css')?>">
 
 <script src="<?=base_url('vendor/jquery.min.js')?>"></script>
 <script src="<?=base_url('vendor/mdl/material.min.js')?>"></script>
+<script src="<?=base_url('vendor/sweetalert2/sweetalert2.min.js')?>"></script>
 
 <title><?=$title?></title>
 
