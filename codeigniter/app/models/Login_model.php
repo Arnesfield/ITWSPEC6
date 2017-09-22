@@ -34,4 +34,16 @@ class Login_model extends CI_Model {
     
     return $user;
   }
+
+  // create account
+  public function create() {
+    $user = array(
+      'firstname' => $this->input->post('firstname', true),
+      'lastname' => $this->input->post('lastname', true),
+      'username' => $this->input->post('username', true),
+      'password' => sha1($this->input->post('password', true)),
+      'account_access' => $this->input->post('account_access', true),
+    );
+    return $this->db->insert('accounts', $user);
+  }
 }
