@@ -54,5 +54,5 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
 
 // default
-$route['default_controller'] = 'item';
+$route['default_controller'] = 'login';
 // $route['(:any)'] = 'item/$1';
