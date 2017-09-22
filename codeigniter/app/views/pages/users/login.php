@@ -7,7 +7,7 @@
   <div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label w-input">
       <input class="mdl-textfield__input js-val-input" type="text" name="username" id="username"
-        maxlength="128"/>
+        maxlength="128" value="<?=set_value('username')?>"/>
       <label for="username" class="mdl-textfield__label">Username</label>
     </div>
   </div>
@@ -33,6 +33,10 @@
   </div>
 
 </form>
+
+<div class="my-pt-5 my-pb-3" style="color: #f44336">
+  <?php echo validation_errors(); ?>
+</div>
 
 </div>
 

@@ -8,10 +8,10 @@ class Login_model extends CI_Model {
     $this->load->database();
   }
 
-  public function fetch($username, $password) {
+  public function fetch() {
     $this->db->from('accounts')->where(array(
-      'username' => $username,
-      'password' => $password
+      'username' => $this->input->post('username', true),
+      'password' => sha1($this->input->post('password', true))
     ));
     $user = $this->db->get();
     
