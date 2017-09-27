@@ -30,6 +30,14 @@
   
   <div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label w-input">
+      <input class="mdl-textfield__input js-val-input" type="email" name="email" id="email"
+        maxlength="128" value="<?=set_value('email')?>"/>
+      <label for="email" class="mdl-textfield__label">Email</label>
+    </div>
+  </div>
+
+  <div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label w-input">
       <input class="mdl-textfield__input js-val-input" type="password" name="password" id="password"
         maxlength="128"/>
       <label for="password" class="mdl-textfield__label">Password</label>

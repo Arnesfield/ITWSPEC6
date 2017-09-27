@@ -29,3 +29,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 
 node_modules/
+
+## ! contains sensitive information
+codeigniter/app/config/email.php
