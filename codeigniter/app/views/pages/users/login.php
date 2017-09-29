@@ -30,6 +30,11 @@
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
       Register
     </a>
+
+    <a href="<?=base_url('login/forgot')?>"
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+      Forgot Password?
+    </a>
   </div>
 
 </form>

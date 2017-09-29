@@ -78,4 +78,38 @@ class Login_model extends CI_Model {
 
     return FALSE;
   }
+
+  public function get_id_for_reset($code) {
+    $this->db->from('accounts')->where(array(
+      'reset_code' => $code
+    ));
+    $user = $this->db->get();
+
+    return $user->num_rows() == 1 ? $user->result()[0]->user_id : FALSE;
+  }
+
+  public function reset($id) {
+    $data = array(
+      'password' => sha1($this->input->post('password', true))
+    );
+    $this->db->where('user_id', $id);
+    return $this->db->update('accounts', $data);
+  }
+
+  public function does_exist_email($email) {
+    $this->db->from('accounts')->where(array(
+      'email' => $email
+    ));
+    $user = $this->db->get();
+
+    return $user->num_rows() == 1;
+  }
+
+  public function update_reset_code($email, $code) {
+    $data = array(
+      'reset_code' => $code
+    );
+    $this->db->where('email', $email);
+    return $this->db->update('accounts', $data);
+  }
 }

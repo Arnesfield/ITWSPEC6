@@ -90,17 +90,18 @@ class Login extends CI_Controller {
     return random_string('alnum', 5);
   }
 
-  public function sendmail($email, $code) {
+  public function sendmail($email, $code, $reset_password = FALSE) {
     // $code = md5(uniqid(rand(), true));
     
     // true on third param on view
-    $this->email->from('email@mail.com', 'Jefferson Rylee');
+    $this->email->from('rylee.jeff385@gmail.com', 'Jefferson Rylee');
     $this->email->to($email);
-    $this->email->subject('Email Verification');
+    $this->email->subject($reset_password ? 'Reset Password' : 'Email Verification');
     $data = array(
       'code' => $code
     );
-    $this->email->message($this->load->view('pages/email', $data, TRUE));
+    $this->email->message($this->load->view(
+      $reset_password ? 'pages/forgot_page' : 'pages/email', $data, TRUE));
     
     if ($this->email->send()) {
       echo 'email sent\n';
@@ -109,5 +110,38 @@ class Login extends CI_Controller {
       echo $this->email->print_debugger();
     }
 	}
+
+  // forgot
+  public function forgot() {
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+    
+    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+
+    if ($this->form_validation->run() === FALSE) {
+      $data = array(
+        'title' => 'Forgot Password'
+      );
+  
+      $this->load->view('templates/header', $data);
+      $this->load->view('pages/forgot');
+      $this->load->view('templates/footer');
+    }
+    else {
+
+      // check if email exists
+      $email = $this->input->post('email', true);
+
+      if ($this->login_model->does_exist_email($email)) {
+        // generate code
+        $code = $this->generate();
+        $this->login_model->update_reset_code($email, $code);
+        $this->sendmail($email, $code, TRUE);
+      }
+      else {
+        echo "User does not exist";
+      }
+    }
+  }
 
 }
