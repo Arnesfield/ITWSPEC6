@@ -156,7 +156,33 @@ class User extends CI_Controller {
     }
 
     public function forgot() {
-        $this->load->view('user/forgot');
+        // add form validtion for email
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+
+        // if fields are not valid
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('user/forgot');
+        }
+        // successful submit
+        else {
+            // check if email exists in database
+            // if exists, send email for reset password
+            // else, show error
+
+            $email = $this->input->post('email', true);
+            
+            // if email exists
+            if ($this->UserModel->does_email_exist($email)) {
+                // send email for reset password
+
+                // 
+
+                echo "Email was sent";
+            }
+            else {
+                echo "User not found";
+            }
+        }
     }
 
 }
