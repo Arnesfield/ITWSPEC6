@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Item extends CI_Controller {
+class Item extends MY_View_Controller {
 
   public function __construct() {
     parent::__construct();
@@ -52,7 +52,7 @@ class Item extends CI_Controller {
       else {
         set_cookie('msg', 'An error occurred.', 60);
       }
-      redirect(base_url());
+      redirect(base_url('item'));
     }
 
   }
@@ -89,7 +89,7 @@ class Item extends CI_Controller {
       else {
         set_cookie('msg', 'An error occurred.', 60);
       }
-      redirect(base_url());
+      redirect(base_url('item'));
     }
   }
 
@@ -107,7 +107,7 @@ class Item extends CI_Controller {
     else {
       set_cookie('msg', 'An error occurred.', 60);
     }
-    redirect(base_url());
+    redirect(base_url('item'));
   }
   
 }
