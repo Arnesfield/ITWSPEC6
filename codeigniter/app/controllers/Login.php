@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
   
+  private $_EMAIL = 'mail.arnesfield@gmail.com';
+
   public function __construct() {
     parent::__construct();
     $this->load->model('login_model');
@@ -94,7 +96,7 @@ class Login extends CI_Controller {
     // $code = md5(uniqid(rand(), true));
     
     // true on third param on view
-    $this->email->from('rylee.jeff385@gmail.com', 'Jefferson Rylee');
+    $this->email->from($this->_EMAIL, 'Jefferson Rylee');
     $this->email->to($email);
     $this->email->subject($reset_password ? 'Reset Password' : 'Email Verification');
     $data = array(
