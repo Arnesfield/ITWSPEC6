@@ -1,12 +1,12 @@
 .DS_Store
 
-codeigniter/app/cache/*
-!codeigniter/app/cache/index.html
-!codeigniter/app/cache/.htaccess
+codeigniter/application/cache/*
+!codeigniter/application/cache/index.html
+!codeigniter/application/cache/.htaccess
 
-codeigniter/app/logs/*
-!codeigniter/app/logs/index.html
-!codeigniter/app/logs/.htaccess
+codeigniter/application/logs/*
+!codeigniter/application/logs/index.html
+!codeigniter/application/logs/.htaccess
 
 composer.lock
 
@@ -31,4 +31,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 node_modules/
 
 ## ! contains sensitive information
-codeigniter/app/config/email.php
+codeigniter/application/config/email.php
