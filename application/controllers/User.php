@@ -208,6 +208,45 @@ class User extends CI_Controller {
         }
     }
 
+    // function for views/user/email/reset.php
+    public function reset() {
+        // get 3rd segment (the code)
+        $code = $this->uri->segment(3);
+
+        // get user with $code
+        if ($user = $this->UserModel->get_user_with_code($code)) {
+            $this->reset_password($user);
+        }
+        // if user does not exist
+        else {
+            echo "User not found";
+        }
+    }
+
+    // reset password form here
+    public function reset_password($user = NULL) {
+
+        // form validation
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('repassword', 'Confirm Password', 'required|matches[password]');
+
+        if ($this->form_validation->run() == FALSE) {
+            // display form with reset password
+            // if form was submitted, use id from form instead
+            $data = array(
+                'user_id' => !empty($this->input->post()) ? $this->input->post('user_id') : $user->id
+            );
+
+            // load view for reset password
+            $this->load->view('user/reset_password', $data);
+        }
+        // if reset is successful
+        else {
+            // update password using post(user_id)
+            $this->UserModel->reset_password();
+            echo "Password successfully reset!";
+        }
+    }
 }
 
 

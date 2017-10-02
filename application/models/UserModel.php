@@ -35,6 +35,22 @@ class UserModel extends CI_Model {
         $this->db->from('tbluser')->where('id', $id);
         return $this->db->update('tbluser', array('reset_code' => $code));
     }
+
+    // return user with $code
+    public function get_user_with_code($code) {
+        $this->db->from('tbluser')->where('reset_code', $code);
+        $q = $this->db->get()->result();
+        return !empty($q) ? $q[0] : FALSE;
+    }
+
+    // reset password
+    public function reset_password() {
+        $id = $this->input->post('user_id', true);
+        $this->db->from('tbluser')->where('id', $id);
+        return $this->db->update('tbluser', array(
+            'password' => sha1($this->input->post('password', true))
+        ));
+    }
 }
 
 
