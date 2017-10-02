@@ -155,6 +155,10 @@ class User extends CI_Controller {
         }
     }
 
+    public function forgot() {
+        $this->load->view('user/forgot');
+    }
+
 }
 
 

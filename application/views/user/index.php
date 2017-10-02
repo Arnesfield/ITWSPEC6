@@ -1,4 +1,5 @@
 
+<div class="container">
 
 
 <div class="row">
@@ -21,10 +22,11 @@
         </div>
         <br>
         <center><button type="submit" class="btn btn-warning">SUBMIT</button>
+        <a href="<?= base_url().'user/register'?>" class="btn btn-info">REGISTER</a>
+        <a href="<?= base_url().'user/forgot'?>" class="btn btn-info">Forgot Password?</a>
     </form>
     <br><br>
     <!-- <a href="" class="btn btn-info" data-toggle="modal" data-target="#myModal">REGISTER </a> -->
-    <a href="<?= base_url().'user/register'?>" class="btn btn-info">REGISTER</a>
     </div>
 
 
@@ -72,4 +74,6 @@
     </div>
 
   </div>
+</div>
+
 </div>
