@@ -1,12 +1,12 @@
-<div class="container my-pt-1 my-pb-3 -my-pt-1">
+<div class="container my-pt-1 my-pb-5">
 
-  <div>
+  <div class="my-pt-1">
     <h1>CodeIgniter Project Setup</h1>
     <hr>
     <h5>A web application project setup using <a target="_blank" href="https://codeigniter.com/">CodeIgniter</a> (v3.1.5).</h5>
   </div>
 
-  <div>
+  <div class="my-pt-1">
     <h3>Third-party</h3>
     <hr>
     <p>This setup includes the following third-party tools, fonts, modules, or frameworks:</p>
@@ -26,7 +26,7 @@
     </ul>
   </div>
 
-  <div>
+  <div class="my-pt-1">
     <h3>What's inside?</h3>
     <hr>
     <p>CodeIgniter's <strong>application</strong> and <strong>system</strong> directories are separated from the <strong>public</strong> directory.</p>
@@ -35,7 +35,7 @@
 
   project/
   |-- codeigniter/
-  |   |-- app/
+  |   |-- application/
   |   |-- system/
   |
   |-- public/
@@ -50,6 +50,32 @@
       |-- .htaccess
       |-- index.php
     </pre>
+  </div>
+
+  <div class="my-pt-1">
+    <h3>Release Notes</h3>
+    <hr>
+
+    <h4>v1.3 (<a target="_blank" href="https://github.com/Arnesfield/ci-setup/releases/latest">latest</a>)</h4>
+    <ul>
+      <li>Allowed multiple views to load in <code>MY_View_Controller</code></li>
+      <li>Fixed <code>index.php</code> problem in <code>base_url</code></li>
+    </ul>
+
+    <h4>v1.2</h4>
+    <ul>
+      <li>Updated <code>MY_View_Controller</code> in <code>application/core</code></li>
+      <li>Updated dynamic <code>base_url</code> in <code>config/config.php</code></li>
+      <li>Restricted directory listing in <code>public/.htaccess</code></li>
+      <li>Removed <code>any</code> route in <code>config/routes.php</code></li>
+    </ul>
+
+    <h4>v1.1</h4>
+    <ul>
+      <li>Added custom controller for handling views</li>
+      <li>Renamed <code>codeigniter/app/</code> to <code>codeigniter/application/</code></li>
+      <li>Added <code>email.php.example</code> in <code>application/config/</code></li>
+    </ul>
   </div>
 
 </div>
