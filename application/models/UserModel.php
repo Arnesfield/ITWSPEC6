@@ -23,11 +23,17 @@ class UserModel extends CI_Model {
         return true;
     }
 
-    // returns true if $email exists in database
-    public function does_email_exist($email) {
+    // returns the user if $email exists in database
+    public function get_user_with($email) {
         $this->db->from('tbluser')->where('email', $email);
-        $q = $this->db->get();
-        return $q->num_rows();
+        $q = $this->db->get()->result();
+        return !empty($q) ? $q[0] : FALSE;
+    }
+
+    // update user reset code
+    public function update_reset_code($id, $code) {
+        $this->db->from('tbluser')->where('id', $id);
+        return $this->db->update('tbluser', array('reset_code' => $code));
     }
 }
 

@@ -13,7 +13,7 @@
 
   <div>
     <button type="submit">Reset</button>
-    <a href="<?=base_url('user')?>"></a>
+    <a href="<?=base_url('user')?>">Cancel</a>
   </div>
 
 </form>

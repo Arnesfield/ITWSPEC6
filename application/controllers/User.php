@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller {
 
+    // change this for email (same with config/email.php)
+    private $_EMAIL = "mail.arnesfield@gmail.com";
+
     public function __construct(){
         parent:: __construct();
         $this->load->model('UserModel');
@@ -140,7 +143,7 @@ class User extends CI_Controller {
 
     public function sendemail($to, $code) {
 
-        $this->email->from("charlynannn@gmail.com", 'Cha');
+        $this->email->from($this->_EMAIL, 'Cha');
         $this->email->to($to);
         $this->email->subject('Email Test');
         
@@ -172,16 +175,36 @@ class User extends CI_Controller {
             $email = $this->input->post('email', true);
             
             // if email exists
-            if ($this->UserModel->does_email_exist($email)) {
+            if ($user = $this->UserModel->get_user_with($email)) {
+                // first, generate code
+                // create field in tblusers named 'reset_code'
+                // update $user 'reset_code' field with generated code
                 // send email for reset password
 
-                // 
+                $code = $this->generate();
 
-                echo "Email was sent";
+                $this->UserModel->update_reset_code($user->id, $code);
+                $this->send_reset_to($email, $code);
             }
             else {
                 echo "User not found";
             }
+        }
+    }
+    
+    // send email for reset password
+    public function send_reset_to($email, $code) {
+        // credentials
+        $this->email->from($this->_EMAIL, 'Cha');
+        $this->email->to($email);
+        $this->email->subject('Reset Password');
+        $data = array('code' => $code);
+        $this->email->message($this->load->view('user/email/reset',$data,true));
+        
+        if(! $this->email->send()){
+            echo $this->email->print_debugger();
+        }else{
+            echo "Email was sent";
         }
     }
 
