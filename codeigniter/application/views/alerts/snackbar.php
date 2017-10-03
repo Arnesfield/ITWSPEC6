@@ -1,10 +1,12 @@
+<?php if(isset($msg)): ?>
+
 <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
   <div class="mdl-snackbar__text"></div>
   <button class="mdl-snackbar__action" type="button"></button>
 </div>
 
 <script>
-(function() {
+window.onload = function() {
   'use strict';
   var snackbarContainer = document.querySelector('#snackbar')
   
@@ -20,5 +22,7 @@
     };
     snackbarContainer.MaterialSnackbar.showSnackbar(data)
   })
-}())
+}
 </script>
+
+<?php endif; ?>

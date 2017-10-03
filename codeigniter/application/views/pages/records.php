@@ -12,12 +12,11 @@
   <?php else: ?>
   <?php date_default_timezone_set('Asia/Hong_Kong'); ?>
 
-  <table class="table mdl-shadow--4dp mdl-data-table w-max">
+  <table class="mdl-shadow--4dp mdl-data-table">
 
     <tr>
       <th>Acitivity Name</th>
-      <th>Date</th>
-      <th>Time</th>
+      <th>Date and Time</th>
       <th>Actions</th>
     </tr>
 
@@ -25,14 +24,13 @@
 
     <tr>
       <td><?=$activity->name?></td>
-      <td><?=date('M d Y', $item->date)?></td>
-      <td><?=date('H:i', $item->time)?></td>
+      <td><?=date('M d Y H:i', $activity->datetime)?></td>
       <td>
         <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
           href="<?=base_url('activity/update/' . $activity->id)?>">Update</a>
         
-        <a class="js-delete mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red-500 mdl-color-text--white"
-          data-slug="<?=base_url('item/delete/' . $activity->id)?>">Delete</a>
+        <!-- <a class="js-delete mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red-500 mdl-color-text--white"
+          data-slug="<?=base_url('item/delete/' . $activity->id)?>">Delete</a> -->
       </td>
     </tr>
 
