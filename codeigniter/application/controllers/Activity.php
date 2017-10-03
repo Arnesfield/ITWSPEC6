@@ -5,10 +5,16 @@ class Activity extends MY_View_Controller {
 
   public function __construct() {
     parent::__construct();
+    $this->load->model('activity_model');
   }
   
   public function index() {
-    $this->_view('pages/records', 'My Planner');
+    // fetch data first
+    $activities = $this->activity_model->fetch();
+    $this->_view('pages/records', array(
+      'title' => 'My Planner',
+      'activities' => $activities
+    ));
   }
 }
 
