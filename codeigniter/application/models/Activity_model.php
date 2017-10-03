@@ -33,7 +33,30 @@ class Activity_model extends CI_Model {
       'datetime' => $unix
     );
 
+    $test = $this->fetch(array('datetime' => $unix));
+    if ($test) {
+      return FALSE;
+    }
+
     return $this->db->insert('activity', $data);
+  }
+
+  // update
+  public function update() {
+    date_default_timezone_set('Asia/Hong_Kong');
+    
+    $date = $this->input->post('date', true);
+    $time = $this->input->post('time', true);
+
+    $unix = strtotime($date . ' ' . $time);
+
+    $data = array(
+      'name' => $this->input->post('name', true),
+      'datetime' => $unix
+    );
+
+    $this->db->where('id', $this->input->post('id', true));
+    return $this->db->update('activity', $data);
   }
 }
 

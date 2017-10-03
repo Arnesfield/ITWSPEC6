@@ -13,7 +13,6 @@
   <?php date_default_timezone_set('Asia/Hong_Kong'); ?>
 
   <table class="mdl-shadow--4dp mdl-data-table">
-
     <tr>
       <th>Acitivity Name</th>
       <th>Date and Time</th>
@@ -26,15 +25,15 @@
       <td><?=$activity->name?></td>
       <td><?=date('M d Y H:i', $activity->datetime)?></td>
       <td>
-        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-          href="<?=base_url('activity/update/' . $activity->id)?>">Update</a>
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect"
+          href="<?=base_url('activity/update/' . $activity->id)?>"><i class="material-icons">edit</i></a>
         
         <!-- <a class="js-delete mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red-500 mdl-color-text--white"
           data-slug="<?=base_url('item/delete/' . $activity->id)?>">Delete</a> -->
       </td>
     </tr>
 
-    <?php endforeach; ?>
+  <?php endforeach; ?>
 
 
   </table>
