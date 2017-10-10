@@ -10,7 +10,7 @@ class Form extends MY_View_Controller {
   public function index() {
     $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('username', 'Username', 'trim|required');
+    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha_numeric|min_length[5]|max_length[12]');
     $this->form_validation->set_rules('password', 'Password', 'trim|required');
     $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
     $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
