@@ -1,3 +1,5 @@
+<?php if ($msg = $this->session->flashdata('msg')): ?>
+
 <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
   <div class="mdl-snackbar__text"></div>
   <button class="mdl-snackbar__action" type="button"></button>
@@ -22,3 +24,5 @@
   })
 }())
 </script>
+
+<?php endif; ?>

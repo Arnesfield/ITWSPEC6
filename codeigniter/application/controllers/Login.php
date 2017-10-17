@@ -8,7 +8,11 @@ class Login extends MY_View_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->model('login_model');
-    $this->load->library('email');
+    $this->load->library(array('email', 'session'));
+
+    if ($this->session->has_userdata('isloggedin') == TRUE) {
+      redirect(base_url('item'));
+    }
   }
 
   public function index() {
@@ -24,9 +28,9 @@ class Login extends MY_View_Controller {
         'action' => base_url()
       );
       
-      $this->load->view('templates/header', $data);
-      $this->load->view('pages/users/login');
-      $this->load->view('templates/footer');
+      $this->_view(array(
+        'pages/users/login', 'alerts/snackbar'
+      ), $data);
     }
     else {
       // fetch user
@@ -34,6 +38,10 @@ class Login extends MY_View_Controller {
   
       if ($user) {
         echo 'Logged in successful.';
+
+        $this->session->set_userdata('isloggedin', true);
+        $this->session->set_userdata('userid', 1);
+        $this->session->set_flashdata('msg', 'Logged in successfully.');
   
         // if admin
         if ($user->account_access == 1) {

@@ -90,7 +90,8 @@ class Login_model extends CI_Model {
 
   public function reset($id) {
     $data = array(
-      'password' => sha1($this->input->post('password', true))
+      'password' => sha1($this->input->post('password', true)),
+      'reset_code' => ''
     );
     $this->db->where('user_id', $id);
     return $this->db->update('accounts', $data);

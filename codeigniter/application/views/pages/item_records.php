@@ -49,6 +49,11 @@
 
   <?php endif; ?>
 
+  <br>
+
+  <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--indigo-500 mdl-color-text--white"
+    href="<?=base_url('item/logout')?>"><i class="material-icons">exit_to_app</i> Logout</a>
+
 </div>
 
 <!-- fab -->

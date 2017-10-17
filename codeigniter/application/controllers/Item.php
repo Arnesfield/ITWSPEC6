@@ -5,8 +5,14 @@ class Item extends MY_View_Controller {
 
   public function __construct() {
     parent::__construct();
-    $this->load->helper('cookie');
+    // $this->load->helper('cookie');
     $this->load->model('item_model');
+    $this->load->library('session');
+
+    if ($this->session->has_userdata('isloggedin') == FALSE) {
+      $this->session->set_flashdata('msg', 'You have been logged out.');
+      redirect(base_url('login'));
+    }
   }
 
   public function index() {
@@ -17,17 +23,28 @@ class Item extends MY_View_Controller {
       'items' => $items
     );
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('pages/item_records');
-    
-    if (!empty($this->input->cookie('msg'))) {
-      $this->load->view('alerts/snackbar', array(
-        'msg' => $this->input->cookie('msg')
-      ));
-      delete_cookie('msg');
-    }
+    $this->_view(array(
+      'pages/item_records', 'alerts/snackbar'
+    ), $data);
 
-    $this->load->view('templates/footer');
+    // return;
+
+    // $this->load->view('templates/header', $data);
+    // $this->load->view('pages/item_records');
+    
+    // if (!empty($this->input->cookie('msg'))) {
+    //   $this->load->view('alerts/snackbar', array(
+    //     'msg' => $this->input->cookie('msg')
+    //   ));
+    //   delete_cookie('msg');
+    // }
+
+    // $this->load->view('templates/footer');
+  }
+
+  public function logout() {
+    $this->session->sess_destroy();
+    redirect(base_url('item'));
   }
 
   // create item
@@ -47,10 +64,10 @@ class Item extends MY_View_Controller {
     }
     else {
       if ($this->item_model->add_item()) {
-        set_cookie('msg', 'Item added successfully.', 60);
+        $this->session->set_flashdata('msg', 'Item added successfully.');
       }
       else {
-        set_cookie('msg', 'An error occurred.', 60);
+        $this->session->set_flashdata('msg', 'An error occurred.');
       }
       redirect(base_url('item'));
     }
@@ -84,10 +101,10 @@ class Item extends MY_View_Controller {
     }
     else {
       if ($this->item_model->update_item($item->item_id)) {
-        set_cookie('msg', 'Item updated successfully.', 60);
+        $this->session->set_flashdata('msg', 'Item updated successfully.');
       }
       else {
-        set_cookie('msg', 'An error occurred.', 60);
+        $this->session->set_flashdata('msg', 'An error occurred.');
       }
       redirect(base_url('item'));
     }
@@ -102,10 +119,10 @@ class Item extends MY_View_Controller {
     }
 
     if ($this->item_model->delete_item($item->item_id)) {
-      set_cookie('msg', 'Item deleted successfully.', 60);
+      $this->session->set_flashdata('msg', 'Item deleted successfully.');
     }
     else {
-      set_cookie('msg', 'An error occurred.', 60);
+      $this->session->set_flashdata('msg', 'An error occurred.');
     }
     redirect(base_url('item'));
   }
