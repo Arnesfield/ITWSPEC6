@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2017 at 12:47 PM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Generation Time: Oct 20, 2017 at 08:39 AM
+-- Server version: 10.1.9-MariaDB
+-- PHP Version: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -38,8 +36,10 @@ CREATE TABLE `accounts` (
   `account_access` tinyint(1) NOT NULL,
   `registered_at` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `image` varchar(128) NOT NULL,
   `verification_code` varchar(10) NOT NULL,
-  `is_verified` tinyint(1) NOT NULL DEFAULT '0'
+  `is_verified` tinyint(1) NOT NULL DEFAULT '0',
+  `reset_code` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -94,14 +94,11 @@ ALTER TABLE `tbl_item`
 --
 ALTER TABLE `accounts`
   MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tbl_item`
 --
 ALTER TABLE `tbl_item`
   MODIFY `item_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,5 +1,13 @@
-
 <div class="container">
+
+  <div class="row">
+    <div class="col-md-2">
+      <img src="<?=base_url('uploads/' . $user->image)?>" alt="" style="width: 100%">
+    </div>
+    <div class="col-md-10">
+      <h4>Hello, <?=$user->username?></h4>
+    </div>
+  </div>
 
   <h1><?=$title?></h1>
 

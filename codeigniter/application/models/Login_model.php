@@ -8,6 +8,12 @@ class Login_model extends CI_Model {
     $this->load->database();
   }
 
+  public function get_user($id) {
+    return $this->db->get_where('accounts', array(
+      'user_id' => $id
+    ))->result()[0];
+  }
+
   public function fetch() {
     $this->db->from('accounts')->where(array(
       'username' => $this->input->post('username', true),
@@ -42,7 +48,7 @@ class Login_model extends CI_Model {
   }
 
   // create account
-  public function create($email_verification) {
+  public function create($email_verification, $image) {
     $user = array(
       'firstname' => $this->input->post('firstname', true),
       'lastname' => $this->input->post('lastname', true),
@@ -51,6 +57,7 @@ class Login_model extends CI_Model {
       'verification_code' => $email_verification,
       'password' => sha1($this->input->post('password', true)),
       'account_access' => $this->input->post('account_access', true),
+      'image' => $image,
     );
     return $this->db->insert('accounts', $user);
   }

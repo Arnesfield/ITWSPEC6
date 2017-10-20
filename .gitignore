@@ -1,6 +1,5 @@
 .DS_Store
 
-<<<<<<< HEAD
 codeigniter/application/cache/*
 !codeigniter/application/cache/index.html
 !codeigniter/application/cache/.htaccess
@@ -8,15 +7,6 @@ codeigniter/application/cache/*
 codeigniter/application/logs/*
 !codeigniter/application/logs/index.html
 !codeigniter/application/logs/.htaccess
-=======
-codeigniter/app/cache/*
-!codeigniter/app/cache/index.html
-!codeigniter/app/cache/.htaccess
-
-codeigniter/app/logs/*
-!codeigniter/app/logs/index.html
-!codeigniter/app/logs/.htaccess
->>>>>>> a3e02c4ce5fae147be38565b9bbeb39acd86e26f
 
 composer.lock
 
@@ -42,3 +32,5 @@ node_modules/
 
 ## ! contains sensitive information
 codeigniter/application/config/email.php
+
+public/uploads/

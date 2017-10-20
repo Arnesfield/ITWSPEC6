@@ -40,7 +40,7 @@ class Login extends MY_View_Controller {
         echo 'Logged in successful.';
 
         $this->session->set_userdata('isloggedin', true);
-        $this->session->set_userdata('userid', 1);
+        $this->session->set_userdata('userid', $user->user_id);
         $this->session->set_flashdata('msg', 'Logged in successfully.');
   
         // if admin
@@ -85,11 +85,32 @@ class Login extends MY_View_Controller {
       $this->load->view('templates/footer');
     }
     else {
+      // file upload
+      $config['upload_path'] = './uploads/';
+      $config['allowed_types'] = 'gif|jpg|png';
+      $config['max_size'] = 100;
+      $config['max_width'] = 1024;
+      $config['max_height'] = 768;
+
+      $this->load->library('upload', $config);
+
+      if ( ! $this->upload->do_upload('image')) {
+        // $error = array('error' => $this->upload->display_errors());
+        // $this->load->view('upload_form', $error);
+        print($this->upload->display_errors());
+      }
+      else {
+        // $data = array('upload_data' => $this->upload->data());
+        // $this->load->view('upload_success', $data);
+        $image = $this->upload->data('file_name');
+      }
+
+
       $email = $this->input->post('email', true);
       $code = $this->generate();
 
       $this->sendmail($email, $code);
-      $this->login_model->create($code);
+      $this->login_model->create($code, $image);
       echo 'Successfully created account! Please check your email.';
     }
     

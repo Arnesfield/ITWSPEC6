@@ -2,7 +2,7 @@
 
 <h1>Signup</h1>
 
-<form action="<?=$action?>" method="post">
+<form action="<?=$action?>" method="post" enctype="multipart/form-data">
 
   <div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label w-input">
@@ -57,6 +57,10 @@
       <option value="1" <?=set_value('account_access') == 1 ? 'selected' : ''?>>Admin</option>
       <option value="2" <?=set_value('account_access') == 2 ? 'selected' : ''?>>User</option>
     </select>
+  </div>
+
+  <div>
+    <input type="file" name="image" id="image">
   </div>
 
   <div class="my-pt-4">

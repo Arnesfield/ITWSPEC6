@@ -18,9 +18,15 @@ class Item extends MY_View_Controller {
   public function index() {
     $items = $this->item_model->get_items();
 
+    $this->load->model('login_model');
+    $id = $this->session->userdata('userid');
+    $user = $this->login_model->get_user($id);
+    // echo $user->image;
+
     $data = array(
       'title' => 'Item Records',
-      'items' => $items
+      'items' => $items,
+      'user' => $user
     );
 
     $this->_view(array(
