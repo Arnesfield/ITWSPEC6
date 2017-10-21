@@ -69,7 +69,25 @@ class Item extends MY_View_Controller {
       $this->load->view('templates/footer');
     }
     else {
-      if ($this->item_model->add_item()) {
+      // file upload
+      $config['upload_path'] = './uploads/';
+      $config['allowed_types'] = 'gif|jpg|png';
+      $config['max_size'] = 100;
+      $config['max_width'] = 1024;
+      $config['max_height'] = 768;
+
+      $this->load->library('upload', $config);
+
+      if ( ! $this->upload->do_upload('image')) {
+        // $error = array('error' => $this->upload->display_errors());
+        // $this->load->view('upload_form', $error);
+        $image = '';
+      }
+      else {
+        $image = $this->upload->data('file_name');
+      }
+      
+      if ($this->item_model->add_item($image)) {
         $this->session->set_flashdata('msg', 'Item added successfully.');
       }
       else {
@@ -106,7 +124,26 @@ class Item extends MY_View_Controller {
       $this->load->view('templates/footer');
     }
     else {
-      if ($this->item_model->update_item($item->item_id)) {
+      // file upload
+      $config['upload_path'] = './uploads/';
+      $config['allowed_types'] = 'gif|jpg|png';
+      $config['max_size'] = 100;
+      $config['max_width'] = 1024;
+      $config['max_height'] = 768;
+
+      $this->load->library('upload', $config);
+
+      // image upload is optional!
+      if ( ! $this->upload->do_upload('image')) {
+        // $error = array('error' => $this->upload->display_errors());
+        // $this->load->view('upload_form', $error);
+        $image = '';
+      }
+      else {
+        $image = $this->upload->data('file_name');
+      }
+
+      if ($this->item_model->update_item($item->item_id, $image)) {
         $this->session->set_flashdata('msg', 'Item updated successfully.');
       }
       else {

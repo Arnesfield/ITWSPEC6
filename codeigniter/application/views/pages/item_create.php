@@ -2,7 +2,7 @@
 
   <h1><?=$title?></h1>
 
-  <form action="<?=base_url('item/create')?>" method="post">
+  <form action="<?=base_url('item/create')?>" method="post" enctype="multipart/form-data">
 
     <!-- name -->
     <div class="relative">
@@ -33,6 +33,11 @@
         <label for="price" class="mdl-textfield__label">Item Price</label>
         <span class="mdl-textfield__error">Number required!</span>
       </div>
+    </div>
+
+    <div>
+      <label for="image">Image</label>
+      <input type="file" name="image" id="image">
     </div>
 
     <div class="mdl-card__actions mdl-card--border my-p-2 my-mt-2">

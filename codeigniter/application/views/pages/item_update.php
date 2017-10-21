@@ -2,7 +2,7 @@
 
   <h1><?=$title?></h1>
 
-  <form action="<?=base_url('item/update/' . $item->item_slug)?>" method="post">
+  <form action="<?=base_url('item/update/' . $item->item_slug)?>" method="post" enctype="multipart/form-data">
 
     <!-- name -->
     <div class="relative">
@@ -32,6 +32,18 @@
           maxlength="128" pattern = "[0-9]*(\.[0-9]+)?" value="<?=$item->item_price?>"/>
         <label for="price" class="mdl-textfield__label">Item Price</label>
         <span class="mdl-textfield__error">Number required!</span>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <label for="image">Current Image:</label>
+        <img class="item-image" src="<?=base_url('uploads/' . $item->item_image)?>" alt="none">
+      </div>
+
+      <div class="my-mt-3">
+        <label for="image">Image</label>
+        <input type="file" name="image" id="image">
       </div>
     </div>
 

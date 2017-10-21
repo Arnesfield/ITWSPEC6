@@ -38,3 +38,12 @@ a:hover {
 .relative {
   position: relative
 }
+
+.item-image {
+  width: 60px;
+}
+
+td .item-image {
+  display: block;
+  margin: 0 auto;
+}

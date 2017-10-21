@@ -23,6 +23,7 @@
   <table class="table mdl-shadow--4dp mdl-data-table w-max">
 
     <tr>
+      <th></th>
       <th>Item ID</th>
       <th>Item Name</th>
       <th>Item Description</th>
@@ -35,6 +36,7 @@
     <?php foreach ($items as $item): ?>
 
     <tr>
+      <td><img class="item-image" src="<?=base_url('uploads/' . $item->item_image)?>" alt="none"></td>
       <td><?=$item->item_id?></td>
       <td><?=$item->item_name?></td>
       <td><?=$item->item_desc?></td>

@@ -27,13 +27,14 @@ class Item_model extends CI_Model {
     return $slug;
   }
 
-  public function add_item() {
+  public function add_item($image) {
     $slug = $this->create_slug($this->input->post('name', true));
 
     $data = array(
       'item_name' => $this->input->post('name', true),
       'item_desc' => $this->input->post('desc', true),
       'item_price' => $this->input->post('price', true),
+      'item_image' => $image,
       'item_added_at' => time(),
       'item_updated_at' => time(),
       'item_slug' => $slug,
@@ -43,7 +44,7 @@ class Item_model extends CI_Model {
     return $this->db->insert('tbl_item', $data);
   }
 
-  public function update_item($id) {
+  public function update_item($id, $image) {
     // new slug
     $slug = $this->create_slug($this->input->post('name', true));
 
@@ -54,6 +55,10 @@ class Item_model extends CI_Model {
       'item_updated_at' => time(),
       'item_slug' => $slug
     );
+
+    if (!empty($image)) {
+      $data = array_merge($data, array('item_image' => $image));
+    }
 
     $this->db->where('item_id', $id);
     return $this->db->update('tbl_item', $data);
