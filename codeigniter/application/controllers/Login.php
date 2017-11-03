@@ -8,7 +8,7 @@ class Login extends MY_View_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->model('login_model');
-    $this->load->library(array('email', 'session'));
+    $this->load->library(array('email', 'session', 'recaptcha'));
 
     if ($this->session->has_userdata('isloggedin') == TRUE) {
       redirect(base_url('item'));
@@ -58,6 +58,20 @@ class Login extends MY_View_Controller {
 
   }
 
+  // captcha callback
+  public function check_recaptcha($res) {
+    if (!empty($res)) {
+      $verify = $this->recaptcha->verifyResponse($res);
+
+      if ($verify['success'] === TRUE) {
+        return TRUE;
+      }
+    }
+
+    $this->form_validation->set_message('check_recaptcha', '{field} is invalid.');
+    return FALSE;
+  }
+
   // signup
   public function signup() {
     $this->load->helper('form');
@@ -73,11 +87,14 @@ class Login extends MY_View_Controller {
     $this->form_validation->set_rules('password', 'Password', 'trim|required');
     $this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'trim|required|matches[password]');
     $this->form_validation->set_rules('account_access', 'Account access', 'trim|required');
+    $this->form_validation->set_rules('g-recaptcha-response', 'reCAPTCHA', 'required|callback_check_recaptcha');
 
     if ($this->form_validation->run() === FALSE) {
       $data = array(
         'title' => 'Signup',
-        'action' => base_url() . 'login/signup'
+        'action' => base_url() . 'login/signup',
+        'script' => $this->recaptcha->getScriptTag(),
+        'widget' => $this->recaptcha->getWidget()
       );
   
       $this->load->view('templates/header', $data);

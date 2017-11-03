@@ -34,3 +34,4 @@ node_modules/
 codeigniter/application/config/email.php
 
 public/uploads/
+codeigniter/application/config/recaptcha.php

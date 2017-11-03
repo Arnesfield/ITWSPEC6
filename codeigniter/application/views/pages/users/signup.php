@@ -59,7 +59,12 @@
     </select>
   </div>
 
-  <div>
+  <div class="my-pt-1">
+    <?= $script ?>
+    <?= $widget ?>
+  </div>
+
+  <div class="my-pt-1">
     <input type="file" name="image" id="image">
   </div>
 
